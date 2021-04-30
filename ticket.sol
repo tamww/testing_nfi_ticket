@@ -1,4 +1,5 @@
 pragma solidity ^0.5.16;
+pragma experimental ABIEncoderV2;
 
 import "github.com/Open-Attestation/token-registry/contracts/ERC721.sol";
 import "./Ownable.sol";
@@ -112,7 +113,7 @@ contract TicketSystem is ERC721, Ownable, Pausable {
     // set eventStartDate
     function setEventStartDate(uint64 _eventStartDate) 
     public 
-    EventNotStarted 
+    // EventNotStarted 
     onlyOwner 
     {
         eventStartDate = _eventStartDate;
@@ -121,7 +122,7 @@ contract TicketSystem is ERC721, Ownable, Pausable {
     // set ticket supply
     function setSupply(uint64 _ticketSupply)     
     public 
-    EventNotStarted 
+    // EventNotStarted 
     onlyOwner 
     {
         ticket_Supply = _ticketSupply;
@@ -130,7 +131,7 @@ contract TicketSystem is ERC721, Ownable, Pausable {
     // set max price
     function setMaxPrice(uint64 _maxPriceFactor) 
     public 
-    EventNotStarted 
+    // EventNotStarted 
     onlyOwner 
     {
         maxPriceFactor = _maxPriceFactor;
@@ -149,7 +150,7 @@ contract TicketSystem is ERC721, Ownable, Pausable {
     
     function setTicketForSale(uint256 _ticketId) 
     external 
-    EventNotStarted 
+    // EventNotStarted 
     //whenNotPaused
     isUsed(_ticketId)
     isTicketOwner(_ticketId) 
@@ -160,7 +161,7 @@ contract TicketSystem is ERC721, Ownable, Pausable {
 
     function cancelTicketSale(uint256 _ticketId) 
     external 
-    EventNotStarted
+    // EventNotStarted
     //whenNotPaused
     isTicketOwner(_ticketId)
     {
@@ -252,7 +253,7 @@ contract TicketSystem is ERC721, Ownable, Pausable {
     external 
     //public
     payable 
-    EventNotStarted 
+    // EventNotStarted 
 //    whenNotPaused
     {   
         require((pricepaid >= initialTicketPrice),"not enough money");
@@ -271,12 +272,12 @@ contract TicketSystem is ERC721, Ownable, Pausable {
     function printAll() 
     view 
     public 
-    returns (uint256[] memory idList)
+    returns (Ticket[] memory)
     {
-        //uint256[] memory idList ;
+        Ticket[] memory idList ;
         uint counter = 0;    
         for (uint i = 0; i < tickets.length; i++) {
-                idList[i] = tickets[i].price;
+                idList[i]=tickets[i];
                 counter++;
             }
         
