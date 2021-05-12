@@ -257,6 +257,7 @@ contract TicketSystem is ERC721, Ownable, Pausable {
 //    whenNotPaused
     {   
         require((pricepaid >= initialTicketPrice),"not enough money");
+        require((balanceOf(msg.sender)<=1),"exceed ticket limit");
         
         if(pricepaid > initialTicketPrice)
         {
